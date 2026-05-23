@@ -315,12 +315,7 @@ function About() {
                 <Sparkles className="absolute top-6 right-6 md:top-8 md:right-8 w-8 h-8 md:w-12 md:h-12 text-primary opacity-30 group-hover:opacity-100 group-hover:rotate-12 transition-all duration-500" />
                 
                 <div className="relative z-10">
-                  <div className="inline-flex items-center gap-3 px-3 py-1.5 md:px-4 md:py-2 rounded-full border border-background/20 mb-6 md:mb-8">
-                    <span className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary animate-pulse" />
-                    <span className="text-primary font-mono text-[10px] md:text-xs uppercase tracking-widest">Phase {String(activePhase + 1).padStart(2, '0')}</span>
-                  </div>
-
-                  <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display leading-[1.2] md:leading-[1.1] mb-6 md:mb-8 italic">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-display leading-[1.2] md:leading-[1.1] mb-6 md:mb-8 italic">
                     {phases[activePhase].desc.split(' ').map((word, index) => (
                       <motion.span
                         key={index}
@@ -349,10 +344,10 @@ function About() {
 
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4 mt-6 md:mt-8">
               {[
-                { label: "STRATEGY", val: "100%" },
-                { label: "EXECUTION", val: "100%" },
-                { label: "RESULTS", val: "100%" },
-                { label: "GROWTH", val: "∞" },
+                { label: "STRATEGY", val: "97%" },
+                { label: "EXECUTION", val: "95%" },
+                { label: "RESULTS", val: "98%" },
+                { label: "GROWTH", val: "99%" },
               ].map((stat, i) => (
                 <motion.div 
                   key={stat.label}
