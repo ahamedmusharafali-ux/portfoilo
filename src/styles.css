@@ -83,13 +83,6 @@
   }
 }
 
-.grid-bg {
-  background-image:
-    linear-gradient(to right, oklch(0.18 0.01 0 / 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(0.18 0.01 0 / 0.04) 1px, transparent 1px);
-  background-size: 80px 80px;
-}
-
 .noise::before {
   content: "";
   position: absolute;

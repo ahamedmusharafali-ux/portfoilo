@@ -8,44 +8,7 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-function CustomCursor() {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
 
-  useEffect(() => {
-    const moveCursor = (e: MouseEvent) => setPosition({ x: e.clientX, y: e.clientY });
-    const handleMouseOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      setIsHovering(
-        target.tagName === "A" ||
-        target.tagName === "BUTTON" ||
-        target.closest("a") !== null ||
-        target.closest("button") !== null ||
-        target.closest(".work-card") !== null
-      );
-    };
-
-    window.addEventListener("mousemove", moveCursor);
-    window.addEventListener("mouseover", handleMouseOver);
-    return () => {
-      window.removeEventListener("mousemove", moveCursor);
-      window.removeEventListener("mouseover", handleMouseOver);
-    };
-  }, []);
-
-  return (
-    <motion.div
-      className="fixed top-0 left-0 w-4 h-4 rounded-full bg-primary pointer-events-none z-50 mix-blend-difference hidden md:block"
-      animate={{
-        x: position.x - 8,
-        y: position.y - 8,
-        scale: isHovering ? 3 : 1,
-        opacity: position.x === 0 && position.y === 0 ? 0 : 1,
-      }}
-      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-    />
-  );
-}
 
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -127,7 +90,7 @@ function Nav() {
 function Hero() {
   const services = ["Growth Strategy", "Performance Marketing", "Revenue Scaling", "Meta Ads"];
   return (
-    <section className="relative grid-bg pt-28 pb-12 overflow-hidden noise">
+    <section className="relative pt-28 pb-12 overflow-hidden">
       <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full bg-primary/15 blur-3xl pointer-events-none" />
       <div className="absolute top-24 right-6 lg:top-32 lg:right-12 flex items-center gap-2 text-[10px] md:text-xs font-mono tracking-widest">
         <span className="w-2 h-2 rounded-full bg-primary blink" /> ACTIVE IN D2D SCALING
@@ -144,7 +107,7 @@ function Hero() {
           <div className="lg:col-span-8">
             <motion.h1 
               initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[clamp(2.5rem,8.5vw,7.5rem)] font-display leading-[0.9]"
+              className="text-[clamp(2rem,6.5vw,5.5rem)] font-display leading-[0.9]"
             >
               BUILDING<br />
               <span className="text-stroke">BRANDS,</span><br />
@@ -218,10 +181,10 @@ function Marquee() {
   const items = ["STRATEGY", "★", "METRICS", "★", "CONVERSION", "★", "POSITIONING", "★", "REVENUE", "★", "GROWTH", "★"];
   const row = [...items, ...items];
   return (
-    <div className="bg-foreground text-background py-6 overflow-hidden border-y border-background/10">
+    <div className="bg-foreground text-background py-3.5 overflow-hidden border-y border-background/10">
       <div className="flex marquee-track whitespace-nowrap">
         {row.map((t, i) => (
-          <span key={i} className={`px-8 font-display text-3xl md:text-5xl ${t === "★" ? "text-primary" : ""}`}>{t}</span>
+          <span key={i} className={`px-6 font-display text-lg md:text-2xl ${t === "★" ? "text-primary" : ""}`}>{t}</span>
         ))}
       </div>
     </div>
@@ -444,10 +407,15 @@ function Experience() {
       <div className="mx-auto max-w-[1400px] px-6 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
           <div className="lg:col-span-3 lg:pt-4">
-            <p className="text-primary text-sm font-semibold tracking-widest">— EXPERIENCE</p>
+            <motion.p 
+              initial={{ x: -20, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} viewport={{ once: true }}
+              className="text-primary text-xs md:text-sm font-semibold tracking-[0.2em] mb-6 md:mb-8 flex items-center gap-4"
+            >
+              <span className="w-8 h-px bg-primary" /> EXPERIENCE
+            </motion.p>
           </div>
           <div className="lg:col-span-9">
-            <h2 className="text-[clamp(2rem,5vw,4.5rem)] font-display">
+            <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-display leading-[0.9]">
               CAREER <span className="text-primary">JOURNEY</span> &<br />ROLES
             </h2>
           </div>
@@ -519,8 +487,13 @@ function Expertise() {
       <div className="mx-auto max-w-[1400px] px-6 md:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12 md:mb-20">
           <div className="lg:col-span-4">
-            <p className="text-primary text-sm font-semibold tracking-widest mb-4 md:mb-6">— EXPERTISE</p>
-            <h2 className="text-[clamp(2rem,5vw,4.5rem)] font-display leading-[0.9]">
+            <motion.p 
+              initial={{ x: -20, opacity: 0 }} whileInView={{ x: 0, opacity: 1 }} viewport={{ once: true }}
+              className="text-primary text-xs md:text-sm font-semibold tracking-[0.2em] mb-6 md:mb-8 flex items-center gap-4"
+            >
+              <span className="w-8 h-px bg-primary" /> EXPERTISE
+            </motion.p>
+            <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] font-display leading-[0.9]">
               STRATEGIES THAT DRIVE<br /><span className="text-primary italic">REAL</span> GROWTH
             </h2>
           </div>
@@ -596,10 +569,15 @@ function Expertise() {
 
 function CTA() {
   return (
-    <section id="contact" className="py-32 bg-foreground text-background grid-bg relative overflow-hidden noise">
+    <section id="contact" className="py-32 bg-foreground text-background relative overflow-hidden noise">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-primary/30 blur-3xl pointer-events-none" />
       <div className="mx-auto max-w-[1400px] px-6 md:px-8 text-center relative">
-        <p className="text-primary text-xs md:text-sm font-semibold tracking-widest mb-6 uppercase">— LET'S CONNECT</p>
+        <motion.p 
+          initial={{ y: 20, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }}
+          className="text-primary text-xs md:text-sm font-semibold tracking-[0.2em] mb-6 flex items-center justify-center gap-4 uppercase"
+        >
+          <span className="w-8 h-px bg-primary" /> LET'S CONNECT <span className="w-8 h-px bg-primary" />
+        </motion.p>
         <h2 className="text-[clamp(2.5rem,8vw,8rem)] font-display leading-[0.9]">
           BUILDING SOMETHING<br /><span className="text-primary italic">MEANINGFUL?</span>
         </h2>
@@ -635,7 +613,6 @@ function Footer() {
 function Index() {
   return (
     <main className="min-h-screen">
-      <CustomCursor />
       <Nav />
       <Hero />
       <Marquee />
